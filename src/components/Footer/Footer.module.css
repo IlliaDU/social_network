@@ -1,0 +1,11 @@
+.foot{
+    grid-area: f;
+    background-color: blueviolet;
+    height: 140px;
+    margin-top: 10px;
+    
+}
+.text{
+    margin-left: 20px;
+    color: chartreuse ;
+}
