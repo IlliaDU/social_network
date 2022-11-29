@@ -1,6 +1,8 @@
 import s from './Users.module.css'
 import userPhoto from '../../assets/images/userPhoto.png';
 import { NavLink } from 'react-router-dom';
+import { followAPI } from '../../api/api';
+import { unFollowAPI } from './../../api/api';
 
 
 let Users = (props) => {
@@ -11,17 +13,15 @@ let Users = (props) => {
         pages.push(i);
     }
 
-
     return <div>
         <div>
             {pages.map(p => {
-                return <span className={props.currentPage === p && s.selectedPage} 
+                return <span className={props.currentPage === p && s.selectedPage}
                     onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
             })}
-        </div> 
+        </div>
         {
-
-            props.users.map(u => <div key={u.id}> 
+            props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <NavLink to={"/content/" + u.id} >
@@ -29,18 +29,14 @@ let Users = (props) => {
                         </NavLink>
                     </div>
                     <div>
-
-                        {u.followed ? <button className={s.buttonFoll} onClick={() => {
-
-                            props.unfollow(u.id)
-
+                        {u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)} className={s.buttonFoll} onClick={() => {
+                            
+                            props.unfollow(u.id);
                         }}>Unfollow</button>
-                            : <button className={s.buttonUnFoll} onClick={() => {
-
+                           
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)} className={s.buttonUnFoll} onClick={() => {
                                 props.follow(u.id)
-
                             }}>Follow</button>}
-
                     </div>
                 </span>
                 <span>
