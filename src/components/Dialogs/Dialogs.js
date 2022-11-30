@@ -1,8 +1,10 @@
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialog-reducer';
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
+
+
 
 
 <DialogItem />;
@@ -32,6 +34,8 @@ const Dialogs = (props) => {
          /* let action = updateNewMessageBodyCreator(body)
          props.store.dispatch(action) */
     }
+
+    if (!props.isAuth) return <Navigate to={"/login"} /> 
 
     return (
         
